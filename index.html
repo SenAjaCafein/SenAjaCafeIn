@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kopi & Rasa — Katalog Menu & Simulasi Kasir</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- ======================================================================
+       TSAQIF: NAVBAR RESPONSIF & DARK/LIGHT MODE TOGGLE
+       ====================================================================== -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+      <a href="#home" class="brand">☕ Kopi<span>&</span>Rasa</a>
+
+      <nav aria-label="Navigasi Utama">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#promo">Promo</a></li>
+          <li><a href="#katalog">Katalog Menu</a></li>
+          <li><a href="#testimoni">Testimoni</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" aria-label="Ganti Tema">
+          <span id="themeIcon">🌙</span> <span id="themeText">Dark</span>
+        </button>
+        <button class="icon-btn" id="openCartBtn">
+          🛒 Kasir <span class="cart-badge" id="cartCount">0</span>
+        </button>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu Navigasi">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       TSAQIF: LANDING PAGE (HERO, PROMO, TESTIMONI)
+       ====================================================================== -->
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge-pill">✨ Katalog Digital & Simulasi Kasir F&B</span>
+          <h1>Racikan Kopi Artisan & Hidangan Hangat Setiap Hari.</h1>
+          <p>
+            Pilih menu favoritmu, gunakan filter kategori instan, dan simulasi pembayaran kasir secara otomatis dalam satu halaman.
+          </p>
+          <a href="#katalog" class="btn-primary">Lihat Katalog Menu ↓</a>
+        </div>
+        <div class="hero-card">
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80" alt="Kopi Spesialti" />
+          <h3>Signature Aren Latte & Croissant</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Disajikan segar dengan biji kopi pilihan Nusantara.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="promo">
+      <div class="container">
+        <div class="section-header">
+          <h2>Promo Spesial Hari Ini</h2>
+          <p>Masukkan kode promo di keranjang kasir untuk mendapatkan potongan harga otomatis.</p>
+        </div>
+        <div class="promo-grid">
+          <div class="promo-card">
+            <h3>Diskon Pengguna Baru 10%</h3>
+            <p style="color: var(--text-secondary); margin-top: 6px;">Berlaku untuk semua pembelian makanan dan minuman tanpa minimum order.</p>
+            <span class="promo-code">Kode: HEMAT10</span>
+          </div>
+          <div class="promo-card">
+            <h3>Traktiran Ngopi Sore 20%</h3>
+            <p style="color: var(--text-secondary); margin-top: 6px;">Nikmati potongan 20% untuk setiap transaksi di atas Rp 50.000.</p>
+            <span class="promo-code">Kode: RASA20</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         RAFIF: KATALOG MENU, SEARCH BAR & FILTER KATEGORI
+         ==================================================================== -->
+    <section class="section" id="katalog" style="background: var(--bg-secondary);">
+      <div class="container">
+        <div class="section-header">
+          <h2>Katalog Menu</h2>
+          <p>Cari nama menu atau filter berdasarkan kategori makanan & minuman.</p>
+        </div>
+
+        <div class="menu-controls">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Cari menu (contoh: Latte, Nasi, Croissant)..." />
+          </div>
+          <div class="filter-group" id="filterGroup">
+            <button class="filter-btn active" data-category="all">Semua</button>
+            <button class="filter-btn" data-category="kopi">Kopi</button>
+            <button class="filter-btn" data-category="non-kopi">Non-Kopi</button>
+            <button class="filter-btn" data-category="makanan">Makanan Berat</button>
+            <button class="filter-btn" data-category="camilan">Camilan</button>
+          </div>
+        </div>
+
+        <div class="menu-grid" id="menuGrid">
+          <!-- Item menu dirender otomatis oleh JavaScript Rafif -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TSAQIF: TESTIMONI PELANGGAN
+         ==================================================================== -->
+    <section class="section" id="testimoni">
+      <div class="container">
+        <div class="section-header">
+          <h2>Kata Pelanggan Kami</h2>
+          <p>Pengalaman pelanggan menikmati sajian dan kecepatan layanan Kopi & Rasa.</p>
+        </div>
+        <div class="testi-grid">
+          <div class="testi-card">
+            <p>"Kopi Susu Gula Aren-nya pas banget manisnya, nggak bikin enek. Sistem ordernya juga cepat!"</p>
+            <strong style="display:block; margin-top:12px;">— Aulia Rahma, Mahasiswi</strong>
+          </div>
+          <div class="testi-card">
+            <p>"Nasi Goreng Kampung dan Matcha Latte jadi paket wajib setiap kerja dari kafe di sini."</p>
+            <strong style="display:block; margin-top:12px;">— Dimas Pratama, UI Designer</strong>
+          </div>
+          <div class="testi-card">
+            <p>"Croissant-nya renyah di luar, lembut di dalam. Harga sangat ramah di kantong."</p>
+            <strong style="display:block; margin-top:12px;">— Nadya Putri, Content Creator</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Kopi & Rasa — Proyek Web Kuliner (Tsaqif • Rafif • Noval)</p>
+  </footer>
+
+  <!-- ======================================================================
+       NOVAL: DRAWER KERANJANG PESANAN, KALKULATOR HARGA & FORM VALIDASI
+       ====================================================================== -->
+  <div class="cart-overlay" id="cartOverlay">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3>🧾 Simulasi Kasir & Order</h3>
+        <button class="icon-btn" id="closeCartBtn">✕</button>
+      </div>
+
+      <div class="cart-items" id="cartItemsContainer">
+        <!-- Item keranjang dirender oleh JS Noval -->
+      </div>
+
+      <div class="calc-box">
+        <div class="promo-input-row">
+          <input type="text" id="promoInput" placeholder="Kode promo (HEMAT10 / RASA20)" />
+          <button class="btn-add" type="button" id="applyPromoBtn">Pakai</button>
+        </div>
+        <small id="promoFeedback" style="display:block; margin-bottom:10px; color:var(--accent);"></small>
+
+        <div class="calc-row">
+          <span>Subtotal</span>
+          <span id="subtotalText">Rp 0</span>
+        </div>
+        <div class="calc-row">
+          <span>Diskon Promo</span>
+          <span id="discountText">- Rp 0</span>
+        </div>
+        <div class="calc-row">
+          <span>PPN (10%)</span>
+          <span id="taxText">Rp 0</span>
+        </div>
+        <div class="calc-row total">
+          <span>Total Bayar</span>
+          <span id="grandTotalText">Rp 0</span>
+        </div>
+      </div>
+
+      <form id="checkoutForm" novalidate>
+        <div class="form-group">
+          <label for="customerName">Nama Pemesan *</label>
+          <input type="text" id="customerName" placeholder="Masukkan nama lengkap" />
+          <span class="error-msg" id="nameError"></span>
+        </div>
+
+        <!-- PILIHAN TIPE PESANAN: TAKEAWAY / DI TEMPAT -->
+        <div class="form-group">
+          <label>Tipe Pesanan *</label>
+          <div class="order-type-group">
+            <label class="order-type-option">
+              <input type="radio" name="orderType" value="Takeaway" />
+              <div class="order-type-box">🛍️ Takeaway</div>
+            </label>
+            <label class="order-type-option">
+              <input type="radio" name="orderType" value="Di Tempat" />
+              <div class="order-type-box">🍽️ Di Tempat</div>
+            </label>
+          </div>
+          <span class="error-msg" id="orderTypeError"></span>
+        </div>
+
+        <!-- PILIHAN NOMOR MEJA (MUNCUL SAAT PILIH "DI TEMPAT") -->
+        <div class="form-group" id="tableSelectGroup" style="display: none;">
+          <label for="tableNumber">Pilih Nomor Meja (1 - 15) *</label>
+          <select id="tableNumber">
+            <option value="">-- Pilih Nomor Meja --</option>
+          </select>
+          <span class="error-msg" id="tableError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="paymentMethod">Metode Pembayaran *</label>
+          <select id="paymentMethod">
+            <option value="">-- Pilih Metode Pembayaran --</option>
+            <option value="QRIS">QRIS (GoPay / OVO / DANA / BCA)</option>
+            <option value="Tunai">Tunai di Kasir</option>
+            <option value="Debit">Kartu Debit / Kredit</option>
+          </select>
+          <span class="error-msg" id="paymentError"></span>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
+          Proses Pembayaran
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL STRUK DIGITAL -->
+  <div class="modal-overlay" id="receiptModal">
+    <div class="receipt-card">
+      <h3 style="text-align:center; margin-bottom:4px;">✅ Pesanan Berhasil!</h3>
+      <p style="text-align:center; color:var(--text-secondary); font-size:0.85rem; margin-bottom:16px;">Struk Digital Kopi & Rasa</p>
+      <div id="receiptContent" style="font-size:0.9rem; border-top:1px dashed var(--border); border-bottom:1px dashed var(--border); padding:14px 0; margin-bottom:16px;"></div>
+      <button class="btn-primary" style="width:100%; justify-content:center;" id="closeReceiptBtn">Selesai</button>
+    </div>
+  </div>
+
+  <script src="assets/js/js.js"></script>
+</body>
+</html>
