@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kopi & Rasa — Katalog Menu & Simulasi Kasir</title>
+  <title>SenAjaIn Cafe — Katalog Menu & Simulasi Kasir</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -11,12 +11,59 @@
 </head>
 <body>
 
+  <!-- ANIMASI BINTANG JATUH (BACKGROUND LAYER) -->
+  <div class="shooting-stars-bg" id="shootingStarsBg" aria-hidden="true"></div>
+
+  <!-- SCROLL PROGRESS BAR -->
+  <div class="scroll-progress-wrap" aria-hidden="true">
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+  </div>
+
+  <!-- CONFETTI LAYER -->
+  <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+
   <!-- ======================================================================
-       TSAQIF: NAVBAR RESPONSIF & DARK/LIGHT MODE TOGGLE
+       DYNAMIC ISLAND: FLOATING STATUS, LIVE ORDER & RIWAYAT PILL
+       ====================================================================== -->
+  <div class="dynamic-island-wrap">
+    <div class="dynamic-island" id="dynamicIsland" role="button" tabindex="0" aria-label="Dynamic Island Status Kasir">
+      <div class="di-main">
+        <div class="di-left">
+          <span class="di-status-dot" id="diDot"></span>
+          <span class="di-text" id="diText">SenAjaIn Cafe • Buka</span>
+        </div>
+        <span class="di-pill-badge" id="diBadge" style="display: none;">0 Item</span>
+      </div>
+
+      <div class="di-expand" id="diExpand">
+        <div class="di-row">
+          <span>Status Operasional</span>
+          <strong id="diStoreStatus">Buka (08:00 - 22:00)</strong>
+        </div>
+        <div class="di-row">
+          <span>Promo Aktif</span>
+          <strong>HEMAT10 • RASA20</strong>
+        </div>
+        <div class="di-row">
+          <span>Total Keranjang</span>
+          <strong id="diTotal">Rp 0</strong>
+        </div>
+        <div class="di-actions">
+          <button type="button" class="di-mini-btn" id="diOpenCartBtn">🛒 Kasir</button>
+          <button type="button" class="di-mini-btn secondary" id="diOpenHistoryBtn">📜 Riwayat</button>
+          <button type="button" class="di-mini-btn secondary" id="diToggleAmbienceBtn">🌧️ Suara</button>
+          <button type="button" class="di-mini-btn secondary" id="diCloseExpandBtn">✕</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       TSAQIF: NAVBAR RESPONSIF & DARK/LIGHT MODE SLIDE BUTTON
        ====================================================================== -->
   <header class="navbar">
     <div class="container nav-wrapper">
-      <a href="#home" class="brand">☕ Kopi<span>&</span>Rasa</a>
+      <a href="#home" class="brand">☕ SenAjaIn Cafe</a>
 
       <nav aria-label="Navigasi Utama">
         <ul class="nav-links" id="navLinks">
@@ -28,9 +75,20 @@
       </nav>
 
       <div class="nav-actions">
-        <button class="icon-btn" id="themeToggle" aria-label="Ganti Tema">
-          <span id="themeIcon">🌙</span> <span id="themeText">Dark</span>
+        <button class="icon-btn" id="openHistoryBtn" title="Riwayat Transaksi">
+          📜 <span class="hide-mobile">Riwayat</span>
         </button>
+
+        <!-- SLIDE BUTTON DARK MODE -->
+        <label class="theme-switch" for="themeSwitchInput" title="Ganti Tema Gelap / Terang" aria-label="Ganti Tema">
+          <input type="checkbox" id="themeSwitchInput" />
+          <span class="theme-slider">
+            <span class="slider-icon sun">☀️</span>
+            <span class="slider-icon moon">🌙</span>
+            <span class="slider-thumb"></span>
+          </span>
+        </label>
+
         <button class="icon-btn" id="openCartBtn">
           🛒 Kasir <span class="cart-badge" id="cartCount">0</span>
         </button>
@@ -51,11 +109,11 @@
           <span class="badge-pill">✨ Katalog Digital & Simulasi Kasir F&B</span>
           <h1>Racikan Kopi Artisan & Hidangan Hangat Setiap Hari.</h1>
           <p>
-            Pilih menu favoritmu, gunakan filter kategori instan, dan simulasi pembayaran kasir secara otomatis dalam satu halaman.
+            Pilih menu favoritmu, atur takaran gula & es sesuai selera, dan simulasi pembayaran kasir secara otomatis dalam satu halaman.
           </p>
           <a href="#katalog" class="btn-primary">Lihat Katalog Menu ↓</a>
         </div>
-        <div class="hero-card">
+        <div class="hero-card spotlight-card">
           <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80" alt="Kopi Spesialti" />
           <h3>Signature Aren Latte & Croissant</h3>
           <p style="color: var(--text-secondary); font-size: 0.9rem;">Disajikan segar dengan biji kopi pilihan Nusantara.</p>
@@ -65,20 +123,20 @@
 
     <section class="section" id="promo">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header reveal-item">
           <h2>Promo Spesial Hari Ini</h2>
-          <p>Masukkan kode promo di keranjang kasir untuk mendapatkan potongan harga otomatis.</p>
+          <p>Klik kode promo untuk menyalin otomatis lalu tempel di keranjang kasir.</p>
         </div>
         <div class="promo-grid">
-          <div class="promo-card">
+          <div class="promo-card spotlight-card reveal-item">
             <h3>Diskon Pengguna Baru 10%</h3>
             <p style="color: var(--text-secondary); margin-top: 6px;">Berlaku untuk semua pembelian makanan dan minuman tanpa minimum order.</p>
-            <span class="promo-code">Kode: HEMAT10</span>
+            <span class="promo-code" data-promo="HEMAT10" title="Klik untuk salin kode">Kode: HEMAT10 📋</span>
           </div>
-          <div class="promo-card">
+          <div class="promo-card spotlight-card reveal-item">
             <h3>Traktiran Ngopi Sore 20%</h3>
             <p style="color: var(--text-secondary); margin-top: 6px;">Nikmati potongan 20% untuk setiap transaksi di atas Rp 50.000.</p>
-            <span class="promo-code">Kode: RASA20</span>
+            <span class="promo-code" data-promo="RASA20" title="Klik untuk salin kode">Kode: RASA20 📋</span>
           </div>
         </div>
       </div>
@@ -87,14 +145,14 @@
     <!-- ====================================================================
          RAFIF: KATALOG MENU, SEARCH BAR & FILTER KATEGORI
          ==================================================================== -->
-    <section class="section" id="katalog" style="background: var(--bg-secondary);">
+    <section class="section section-katalog" id="katalog">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header reveal-item">
           <h2>Katalog Menu</h2>
-          <p>Cari nama menu atau filter berdasarkan kategori makanan & minuman.</p>
+          <p>Cari nama menu, filter kategori, dan kustomisasi varian pesananmu.</p>
         </div>
 
-        <div class="menu-controls">
+        <div class="menu-controls reveal-item">
           <div class="search-box">
             <input type="text" id="searchInput" placeholder="🔍 Cari menu (contoh: Latte, Nasi, Croissant)..." />
           </div>
@@ -107,9 +165,7 @@
           </div>
         </div>
 
-        <div class="menu-grid" id="menuGrid">
-          <!-- Item menu dirender otomatis oleh JavaScript Rafif -->
-        </div>
+        <div class="menu-grid" id="menuGrid"></div>
       </div>
     </section>
 
@@ -118,20 +174,20 @@
          ==================================================================== -->
     <section class="section" id="testimoni">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header reveal-item">
           <h2>Kata Pelanggan Kami</h2>
-          <p>Pengalaman pelanggan menikmati sajian dan kecepatan layanan Kopi & Rasa.</p>
+          <p>Pengalaman pelanggan menikmati sajian dan kecepatan layanan SenAjaIn Cafe.</p>
         </div>
         <div class="testi-grid">
-          <div class="testi-card">
+          <div class="testi-card spotlight-card reveal-item">
             <p>"Kopi Susu Gula Aren-nya pas banget manisnya, nggak bikin enek. Sistem ordernya juga cepat!"</p>
-            <strong style="display:block; margin-top:12px;">— Aulia Rahma, Mahasiswi</strong>
+            <strong style="display:block; margin-top:12px;">— QUINSHA, Pelajar</strong>
           </div>
-          <div class="testi-card">
+          <div class="testi-card spotlight-card reveal-item">
             <p>"Nasi Goreng Kampung dan Matcha Latte jadi paket wajib setiap kerja dari kafe di sini."</p>
-            <strong style="display:block; margin-top:12px;">— Dimas Pratama, UI Designer</strong>
+            <strong style="display:block; margin-top:12px;">— RISA, Karyawan swasta</strong>
           </div>
-          <div class="testi-card">
+          <div class="testi-card spotlight-card reveal-item">
             <p>"Croissant-nya renyah di luar, lembut di dalam. Harga sangat ramah di kantong."</p>
             <strong style="display:block; margin-top:12px;">— Nadya Putri, Content Creator</strong>
           </div>
@@ -141,8 +197,60 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 Kopi & Rasa — Proyek Web Kuliner (Tsaqif • Rafif • Noval)</p>
+    <p>&copy; 2026 SenAjaIn Cafe — Proyek Web Kuliner (Tsaqif • Rafif • Noval)</p>
   </footer>
+
+  <!-- ======================================================================
+       RAFIF: MODAL KUSTOMISASI VARIAN MENU (HOT/ICED, SUGAR LEVEL, CATATAN)
+       ====================================================================== -->
+  <div class="modal-overlay" id="variantModal">
+    <div class="receipt-card" style="max-width: 420px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h3 id="varMenuName">Nama Menu</h3>
+        <button class="icon-btn" id="closeVariantBtn" style="height:34px; padding:0 10px;">✕</button>
+      </div>
+      <p id="varMenuDesc" style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;"></p>
+
+      <div id="drinkOptionsGroup">
+        <div class="form-group">
+          <label>Penyajian *</label>
+          <div class="order-type-group">
+            <label class="order-type-option">
+              <input type="radio" name="varTemp" value="Iced" checked />
+              <div class="order-type-box">🧊 Iced (Dingin)</div>
+            </label>
+            <label class="order-type-option">
+              <input type="radio" name="varTemp" value="Hot" />
+              <div class="order-type-box">🔥 Hot (Panas)</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Takaran Gula *</label>
+          <div class="order-type-group">
+            <label class="order-type-option">
+              <input type="radio" name="varSugar" value="Normal Sugar" checked />
+              <div class="order-type-box">Normal Sugar</div>
+            </label>
+            <label class="order-type-option">
+              <input type="radio" name="varSugar" value="Less Sugar" />
+              <div class="order-type-box">Less Sugar</div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="varNote">Catatan Tambahan (Opsional)</label>
+        <input type="text" id="varNote" placeholder="Contoh: Es sedikit, tanpa sedotan..." />
+      </div>
+
+      <button type="button" class="btn-primary" id="confirmVariantBtn" style="width:100%; justify-content:center; margin-top:8px;">
+        + Masukkan ke Keranjang
+      </button>
+    </div>
+  </div>
 
   <!-- ======================================================================
        NOVAL: DRAWER KERANJANG PESANAN, KALKULATOR HARGA & FORM VALIDASI
@@ -154,9 +262,7 @@
         <button class="icon-btn" id="closeCartBtn">✕</button>
       </div>
 
-      <div class="cart-items" id="cartItemsContainer">
-        <!-- Item keranjang dirender oleh JS Noval -->
-      </div>
+      <div class="cart-items" id="cartItemsContainer"></div>
 
       <div class="calc-box">
         <div class="promo-input-row">
@@ -190,7 +296,6 @@
           <span class="error-msg" id="nameError"></span>
         </div>
 
-        <!-- PILIHAN TIPE PESANAN: TAKEAWAY / DI TEMPAT -->
         <div class="form-group">
           <label>Tipe Pesanan *</label>
           <div class="order-type-group">
@@ -206,7 +311,6 @@
           <span class="error-msg" id="orderTypeError"></span>
         </div>
 
-        <!-- PILIHAN NOMOR MEJA (MUNCUL SAAT PILIH "DI TEMPAT") -->
         <div class="form-group" id="tableSelectGroup" style="display: none;">
           <label for="tableNumber">Pilih Nomor Meja (1 - 15) *</label>
           <select id="tableNumber">
@@ -226,6 +330,22 @@
           <span class="error-msg" id="paymentError"></span>
         </div>
 
+        <div class="form-group" id="cashInputGroup" style="display: none;">
+          <label for="cashReceived">Uang Tunai Diterima (Rp) *</label>
+          <input type="number" id="cashReceived" placeholder="Contoh: 100000" min="0" />
+          <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-top:6px; font-weight:700;">
+            <span>Kembalian:</span>
+            <span id="cashChangeText" style="color:var(--success);">Rp 0</span>
+          </div>
+          <span class="error-msg" id="cashError"></span>
+        </div>
+
+        <div class="qris-box" id="qrisPreviewGroup" style="display: none;">
+          <p style="font-size:0.82rem; font-weight:700; margin-bottom:6px;">Scan QRIS SenAjaIn Cafe</p>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=KOPI-DAN-RASA-QRIS-SIMULASI" alt="QRIS Code" />
+          <small style="display:block; color:var(--text-secondary); margin-top:4px;">Klik Proses Pembayaran setelah scan berhasil</small>
+        </div>
+
         <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
           Proses Pembayaran
         </button>
@@ -237,9 +357,26 @@
   <div class="modal-overlay" id="receiptModal">
     <div class="receipt-card">
       <h3 style="text-align:center; margin-bottom:4px;">✅ Pesanan Berhasil!</h3>
-      <p style="text-align:center; color:var(--text-secondary); font-size:0.85rem; margin-bottom:16px;">Struk Digital Kopi & Rasa</p>
-      <div id="receiptContent" style="font-size:0.9rem; border-top:1px dashed var(--border); border-bottom:1px dashed var(--border); padding:14px 0; margin-bottom:16px;"></div>
-      <button class="btn-primary" style="width:100%; justify-content:center;" id="closeReceiptBtn">Selesai</button>
+      <p style="text-align:center; color:var(--text-secondary); font-size:0.85rem; margin-bottom:16px;">Struk Digital SenAjaIn Cafe</p>
+      <div id="receiptContent" style="font-size:0.88rem; border-top:1px dashed var(--border); border-bottom:1px dashed var(--border); padding:14px 0; margin-bottom:16px;"></div>
+      <div style="display:flex; gap:10px;">
+        <button class="icon-btn" style="flex:1; justify-content:center;" id="printReceiptBtn">🖨️ Cetak</button>
+        <button class="btn-primary" style="flex:1; justify-content:center;" id="closeReceiptBtn">Selesai</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOVAL: MODAL RIWAYAT TRANSAKSI -->
+  <div class="modal-overlay" id="historyModal">
+    <div class="receipt-card" style="max-width: 460px; max-height: 82vh; overflow-y: auto;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h3>📜 Riwayat Transaksi</h3>
+        <button class="icon-btn" id="closeHistoryBtn" style="height:34px; padding:0 10px;">✕</button>
+      </div>
+      <div id="historyListContainer" style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;"></div>
+      <button class="icon-btn" id="clearHistoryBtn" style="width:100%; justify-content:center; color:var(--danger);">
+        🗑️ Hapus Semua Riwayat
+      </button>
     </div>
   </div>
 
